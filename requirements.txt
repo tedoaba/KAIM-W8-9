@@ -1,0 +1,14 @@
+pandas
+numpy
+matplotlib
+seaborn
+dbt
+dbt-postgres
+psycopg2
+telethon
+sqlalchemy
+databases
+scikit-learn
+scipy
+python-dotenv
+
