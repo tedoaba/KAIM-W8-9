@@ -6,6 +6,12 @@ __pycache__/
 # C extensions
 *.so
 
+# Environment
+.week89
+
+# Data
+data/
+
 # Distribution / packaging
 .Python
 build/
