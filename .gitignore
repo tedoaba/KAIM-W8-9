@@ -12,6 +12,11 @@ __pycache__/
 # Data
 data/
 
+#mlflow files
+mlartifacts/
+mlruns/
+
+
 # Distribution / packaging
 .Python
 build/
