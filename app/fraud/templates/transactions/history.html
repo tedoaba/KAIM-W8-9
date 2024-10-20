@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %} Transaction History {% endblock title %}
+
+{%block content %}
+
+    <section class="pt-20 pb-16 lg:px-20">
+        <div class="flex justify-center">
+            <h1 class="mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl xl:px-48 dark:text-white">Transaction History</h1>
+        </div>
+        <table border="1" class="text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-md rounded-lg overflow-hidden mx-auto">
+            <tr>
+                <th class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">Transaction ID</th>
+                <th class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">Category</th>
+                <th class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">Transaction Amount</th>
+                <th class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">Anomaly Score</th>
+                <th class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">Timestamp</th>
+                <th class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">Merchant ID</th>
+                <th class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">Amount</th>
+                <th class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">Customer ID</th>
+                <th class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">Name</th>
+                <th class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">Age</th>
+                <th class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">Address</th>
+                <th class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">Account Balance</th>
+                <th class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">Last Login</th>
+                <th class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">Suspicious Flag</th>
+            </tr>
+            {% for transaction in transactions %}
+            <tr>
+                <td class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">{{ transaction.TransactionID }}</td>
+                <td class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">{{ transaction.Category }}</td>
+                <td class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">{{ transaction.TransactionAmount }}</td>
+                <td class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">{{ transaction.AnomalyScore }}</td>
+                <td class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">{{ transaction.Timestamp }}</td>
+                <td class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">{{ transaction.MerchantID }}</td>
+                <td class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">{{ transaction.Amount }}</td>
+                <td class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">{{ transaction.CustomerID }}</td>
+                <td class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">{{ transaction.Name }}</td>
+                <td class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">{{ transaction.Age }}</td>
+                <td class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">{{ transaction.Address }}</td>
+                <td class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">{{ transaction.AccountBalance }}</td>
+                <td class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">{{ transaction.LastLogin }}</td>
+                <td class="px-2 py-2 border-b border-gray-200 dark:border-gray-700">{{ transaction.SuspiciousFlag }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+    
+
+
+
+{%endblock%}
