@@ -5,6 +5,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import classification_report
 import matplotlib.pyplot as plt
 import shap
+import lime
+import lime.lime_tabular
 
 def get_models():
     models = [
@@ -18,10 +20,20 @@ def get_models():
 def train_models(datasets, models):
     reports = {}
     shap_values_dict= {}
+    lime_explanations = {}
 
     for dataset_name, (X_train, y_train, X_test, y_test) in datasets.items():
         dataset_reports = []
         shap_values_dict[dataset_name] = {}
+        lime_explanations[dataset_name] = {}
+
+        # LIME
+        lime_explainer = lime.lime_tabular.LimeTabularExplainer(
+            X_train.values,
+            feature_names = X_train.columns,
+            class_names=['Class 0', 'Class 1'],
+            discretize_continuous=True
+        )
 
         for model_name, model in models:
             model.fit(X_train, y_train)
@@ -55,7 +67,17 @@ def train_models(datasets, models):
             except Exception as e:
                 print(f"SHAP calculation fialed for {model_name} on {dataset_name}: {e}")
 
+            try:
+                i=0
+                lime_exp = lime_explainer.explain_instance(X_test.iloc[i].values, model.predict_proba)
+                lime_explanations[dataset_name][model_name] = lime_exp
+
+                lime_exp.save_to_file(f'../lime_explanations/{dataset_name}_{model_name}_lime.html')
+
+            except Exception as e:
+                print(f'LIME explanation failed for {model_name} on {dataset_name} : {e}')
+
         reports[dataset_name] = dataset_reports
         shap_values_dict[dataset_name] = shap_values_dict
 
-    return reports, shap_values_dict
+    return reports, shap_values_dict, lime_explanations

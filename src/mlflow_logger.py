@@ -19,7 +19,7 @@ def initialize_mlflow(experiment_name, tracking_uri):
     except Exception as e:
         print(f"Error initializing MLflow experiment: {e}")
 
-def log_model_performance_to_mlflow(reports, shap_values_dict):
+def log_model_performance_to_mlflow(reports, shap_values_dict, lime_explanations):
     for dataset_name, model_reports in reports.items():
         for model_name, model, report in model_reports:
             with mlflow.start_run(run_name=f"{model_name}_{dataset_name}"):
@@ -39,5 +39,8 @@ def log_model_performance_to_mlflow(reports, shap_values_dict):
                 
                 # SHAP
                 shap_plot_path = f"../plots/{dataset_name}_{model_name}_shap_summary.png"
+                lime_explanations_path = f'../lime_explanations/{dataset_name}_{model_name}_lime.html'
                 if os.path.exists(shap_plot_path):
                     mlflow.log_artifact(shap_plot_path)
+                if os.path.exists(lime_explanations_path):
+                    mlflow.log_artifact(lime_explanations_path)
