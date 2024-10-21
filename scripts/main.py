@@ -12,11 +12,9 @@ from eda import univariate_analysis, bivariate_analysis
 from feature_engineering import transaction_frequency, add_time_features
 from scaling_encoding import normalize_features, encode_categorical_features
 from utils import merge_ip_country
-from data_loader import load_data, handle_missing_values, load_datasets, prepare_data
-from model_definition import define_models, compile_dnn_model, compile_rnn_model, compile_lstm_model
-
-
-from train_evaluate import evaluate_models
+from data_loader import load_data, load_datasets, prepare_data
+from model_definition import get_models, train_models
+from mlflow_logger import initialize_mlflow, log_model_performance_to_mlflow
 
 def main():
     # Load data
@@ -32,25 +30,21 @@ def main():
     print(ip_data_original.info())
     print(credit_data_original.info())
 
-    # Load and prepare datasets
+    # Load and prepare data
     fraud_data, credit_data = load_datasets('../data/cleaned_data_1.csv', '../data/cleaned_data_2.csv')
     datasets = prepare_data(fraud_data, credit_data)
 
-    # Define models
-    models = define_models()
+    # Initialize MLflow
+    initialize_mlflow("Fraud Detection Models - 2 Datasets - ML", "http://localhost:5000")
 
-    # Iterate through datasets and dynamically set input shapes for deep learning models
-    for dataset_name, (X_train, y_train, X_test, y_test) in datasets.items():
-        input_shape = X_train.shape[1]  # Number of features in the dataset
+    # Get models
+    models = get_models()
 
-        # Adjust the models for the dataset's input shape
-        for i, (model_name, model_func) in enumerate(models):
-            if model_name in ["Deep Neural Network", "RNN", "LSTM"]:
-                # Use the model function to compile the model with the correct input shape
-                models[i] = (model_name, model_func(input_shape))
+    # Train models and get reports
+    reports = train_models(datasets, models)
 
-    # Train and evaluate models, then log to MLflow
-    evaluate_models(models, datasets)
+    # Log performance to MLflow
+    log_model_performance_to_mlflow(reports)
 
     
 if __name__ == '__main__':
