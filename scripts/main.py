@@ -35,16 +35,16 @@ def main():
     datasets = prepare_data(fraud_data, credit_data)
 
     # Initialize MLflow
-    initialize_mlflow("Fraud Detection Models - 2 Datasets - ML", "http://localhost:5000")
+    initialize_mlflow("Fraud Detection Models - 2 Datasets - ML with SHAP", "http://localhost:5000")
 
     # Get models
     models = get_models()
 
     # Train models and get reports
-    reports = train_models(datasets, models)
+    reports, shap_values_dict = train_models(datasets, models)
 
     # Log performance to MLflow
-    log_model_performance_to_mlflow(reports)
+    log_model_performance_to_mlflow(reports, shap_values_dict)
 
     
 if __name__ == '__main__':
