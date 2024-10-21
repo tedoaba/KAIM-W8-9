@@ -10,10 +10,10 @@ import lime.lime_tabular
 
 def get_models():
     models = [
-        ("Logistic Regression", LogisticRegression(C=1, solver='liblinear')),
-        ("Random Forest", RandomForestClassifier(n_estimators=30, max_depth=3)),
+        ("Logistic_Regression", LogisticRegression(C=1, solver='liblinear')),
+        ("Random_Forest", RandomForestClassifier(n_estimators=30, max_depth=3)),
         ("XGBClassifier", XGBClassifier(use_label_encoder=False, eval_metric='logloss')),
-        ("Decision Tree", DecisionTreeClassifier(max_depth=5)),
+        ("Decision_Tree", DecisionTreeClassifier(max_depth=5)),
     ]
     return models
 
@@ -43,13 +43,13 @@ def train_models(datasets, models):
 
             try:
                 # compute SHAP values
-                if model_name == "Logistic Regression":
+                if model_name == "Logistic_Regression":
                     explainer = shap.Explainer(model, X_train)
                     shap_values = explainer.shap_values(X_test)
-                elif model_name == "Random Forest":
+                elif model_name == "Random_Forest":
                     explainer = shap.TreeExplainer(model, X_train)
                     shap_values = explainer.shap_values(X_test)
-                elif model_name == "Decision Tree":
+                elif model_name == "Decision_Tree":
                     explainer = shap.TreeExplainer(model, X_train)
                     shap_values = explainer.shap_values(X_test)
                 elif model_name == "XGBClassifier":
@@ -61,9 +61,33 @@ def train_models(datasets, models):
 
                 shap_values_dict[dataset_name][model_name] = shap_values
 
-                shap.summary_plot(shap_values, X_test, feature_names=X_train.columns, plot_type="bar", show=False)
-                plt.savefig(f'../plots/{dataset_name}_{model_name}_shap_summary.png')
-                plt.close()
+                if model_name == "Random_Forest":
+                    # SHAP Summary Plot
+                    shap.summary_plot(shap_values, X_test, feature_names=X_train.columns, plot_type="bar", show=False)
+                    plt.savefig(f'../plots/{dataset_name}_{model_name}_shap_summary.png')
+                    plt.close()
+
+                    # SHAP Dependence Plot for the first feature
+                    shap.dependence_plot(0, shap_values[1], X_test, feature_names=X_train.columns, show=False)
+                    plt.savefig(f'../plots/{dataset_name}_{model_name}_shap_dependence.png')
+                    plt.close()
+                else:
+                    shap.summary_plot(shap_values, X_test, feature_names=X_train.columns, plot_type="bar", show=False)
+                    plt.savefig(f'../plots/{dataset_name}_{model_name}_shap_summary.png')
+                    plt.close()
+
+
+                    # SHAP Force Plot for a single instance
+                    shap.force_plot(explainer.expected_value, shap_values[0], X_test.iloc[0], feature_names=X_train.columns, matplotlib=True)
+                    plt.savefig(f'../plots/{dataset_name}_{model_name}_shap_force.png')
+                    plt.close()
+
+                    # SHAP Dependence Plot for the first feature (you can loop over other features)
+                    shap.dependence_plot(0, shap_values, X_test, feature_names=X_train.columns, show=False)
+                    plt.savefig(f'../plots/{dataset_name}_{model_name}_shap_dependence.png')
+                    plt.close()
+
+
             except Exception as e:
                 print(f"SHAP calculation fialed for {model_name} on {dataset_name}: {e}")
 
@@ -73,6 +97,11 @@ def train_models(datasets, models):
                 lime_explanations[dataset_name][model_name] = lime_exp
 
                 lime_exp.save_to_file(f'../lime_explanations/{dataset_name}_{model_name}_lime.html')
+
+                # LIME Feature Importance Plot
+                lime_exp.as_pyplot_figure()
+                plt.savefig(f'../plots/{dataset_name}_{model_name}_lime_feature_importance.png')
+                plt.close()
 
             except Exception as e:
                 print(f'LIME explanation failed for {model_name} on {dataset_name} : {e}')

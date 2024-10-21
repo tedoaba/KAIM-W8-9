@@ -38,9 +38,31 @@ def log_model_performance_to_mlflow(reports, shap_values_dict, lime_explanations
 
                 
                 # SHAP
-                shap_plot_path = f"../plots/{dataset_name}_{model_name}_shap_summary.png"
+                if model_name == 'Random_Forest':
+                    shap_plot_path = f"../plots/{dataset_name}_{model_name}_shap_summary.png"
+                    shap_dependency_path = f'../plots/{dataset_name}_{model_name}_shap_dependence.png'
+                    
+                    if os.path.exists(shap_plot_path):
+                        mlflow.log_artifact(shap_plot_path)
+                    if os.path.exists(shap_dependency_path):
+                        mlflow.log_artifact(shap_dependency_path)
+                else:
+                    shap_plot_path = f"../plots/{dataset_name}_{model_name}_shap_summary.png"
+                    shap_dependency_path = f'../plots/{dataset_name}_{model_name}_shap_dependence.png'
+                    shap_force_path = f'../plots/{dataset_name}_{model_name}_shap_force.png'
+
+                    if os.path.exists(shap_plot_path):
+                        mlflow.log_artifact(shap_plot_path)
+                    if os.path.exists(shap_force_path):
+                        mlflow.log_artifact(shap_force_path)
+                    if os.path.exists(shap_dependency_path):
+                        mlflow.log_artifact(shap_dependency_path)
+
+
                 lime_explanations_path = f'../lime_explanations/{dataset_name}_{model_name}_lime.html'
-                if os.path.exists(shap_plot_path):
-                    mlflow.log_artifact(shap_plot_path)
+                lime_importance_path = f'../plots/{dataset_name}_{model_name}_lime_feature_importance.png'
+
                 if os.path.exists(lime_explanations_path):
                     mlflow.log_artifact(lime_explanations_path)
+                if os.path.exists(lime_importance_path):
+                    mlflow.log_artifact(lime_importance_path)

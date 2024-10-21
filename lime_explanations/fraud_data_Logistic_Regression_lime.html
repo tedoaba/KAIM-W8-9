@@ -37089,25 +37089,25 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_div3PO6PL3KCN50BRD"></div>
+        <div class="lime top_div" id="top_divN9DPQ222L3NY9IH"></div>
         
         <script>
-        var top_div = d3.select('#top_div3PO6PL3KCN50BRD').classed('lime top_div', true);
+        var top_div = d3.select('#top_divN9DPQ222L3NY9IH').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["Class 0", "Class 1"], [0.998216416934312, 0.0017835830656880807]);
+            var pp = new lime.PredictProba(pp_svg, ["Class 0", "Class 1"], [0.992757641188728, 0.007242358811271975]);
             
         
         var exp_div;
             var exp = new lime.Explanation(["Class 0", "Class 1"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["V2 <= -0.60", 0.03102298075754453], ["54168.00 < Time <= 84659.50", -0.014562657792307828], ["V14 <= -0.42", 0.014278933219937229], ["V15 <= -0.58", 0.012601494673782907], ["V11 <= -0.76", 0.011030927844773804], ["V7 <= -0.55", -0.009172240696430814], ["V25 > 0.35", -0.008147296871423668], ["V8 > 0.33", -0.0070890393701044845], ["0.02 < V1 <= 1.32", 0.006005316399039775], ["-0.89 < V3 <= 0.18", -0.0059197159623326345]], 1, exp_div);
+                exp.show([["ip_address > 378814142305878.25", -0.1388508984750467], ["lower_bound_ip_addres > 33501740160.00", -0.026935041298318137], ["signup_purchase_diff > 0.87", 0.006954480351157329], ["user_id > 299914.75", -0.004399873193960031], ["12.00 < hour_of_day <= 17.00", 0.002324794055000879], ["0.00 < sex <= 1.00", 0.0018014395240913915], ["1.00 < day_of_week <= 3.00", -0.0015545920250820359], ["upper_bound_ip_adress > 3350174847.00", -0.0012851140825489258], ["browser <= 0.00", -0.0009389166750186561], ["country <= 72.00", -0.0008040525847843148]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_tabular([["V2", "-0.76", 0.03102298075754453], ["Time", "69195.00", -0.014562657792307828], ["V14", "-0.93", 0.014278933219937229], ["V15", "-1.41", 0.012601494673782907], ["V11", "-1.24", 0.011030927844773804], ["V7", "-1.54", -0.009172240696430814], ["V25", "0.70", -0.008147296871423668], ["V8", "1.31", -0.0070890393701044845], ["V1", "1.05", 0.006005316399039775], ["V3", "0.16", -0.0059197159623326345]], 1, raw_div);
+            exp.show_raw_tabular([["ip_address", "872548283484257.00", -0.1388508984750467], ["lower_bound_ip_addres", "33501975040.00", -0.026935041298318137], ["signup_purchase_diff", "0.91", 0.006954480351157329], ["user_id", "350799.00", -0.004399873193960031], ["hour_of_day", "17.00", 0.002324794055000879], ["sex", "1.00", 0.0018014395240913915], ["day_of_week", "2.00", -0.0015545920250820359], ["upper_bound_ip_adress", "3350197759.00", -0.0012851140825489258], ["browser", "0.00", -0.0009389166750186561], ["country", "36.00", -0.0008040525847843148]], 1, raw_div);
         
         </script>
         </body></html>
