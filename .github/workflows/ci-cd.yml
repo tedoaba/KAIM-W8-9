@@ -13,14 +13,46 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    # Checkout code
     - name: Checkout code
       uses: actions/checkout@v3
 
+    # Set up Python
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.8'
 
+    # Cache pip dependencies to speed up the build
+    - name: Cache pip
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    # Install dependencies
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+    
+    # Run linting with flake8 to ensure code quality
+    - name: Lint code
+      run: |
+        pip install flake8
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+
+    # Run unit tests using pytest
+    - name: Run tests
+      run: |
+        pip install pytest pandas
+        pytest tests --maxfail=1 --disable-warnings
+
+    # Optionally, upload test results
+    - name: Upload test results (optional)
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: test-results.xml
