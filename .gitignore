@@ -8,9 +8,12 @@ __pycache__/
 
 # Environment
 .week89
+.env
 
 # Data
 data/
+mlartifacts
+mlruns
 
 
 #mlflow files

@@ -37089,10 +37089,10 @@
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divJQSXLN4YP0J8W0W"></div>
+        <div class="lime top_div" id="top_divN1K3ZZ2FQJE67B7"></div>
         
         <script>
-        var top_div = d3.select('#top_divJQSXLN4YP0J8W0W').classed('lime top_div', true);
+        var top_div = d3.select('#top_divN1K3ZZ2FQJE67B7').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
@@ -37104,10 +37104,10 @@
             var exp = new lime.Explanation(["Class 0", "Class 1"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["signup_purchase_diff > 0.87", -0.006382387104007902], ["user_id > 299914.75", 0.005975405343208561], ["country <= 72.00", -0.004533700462725122], ["ip_address > 378814142305878.25", 0.0041191809643694845], ["1.00 < source <= 2.00", -0.003146938877072644], ["age <= 27.00", -0.0029847279661766738], ["-0.81 < purchase_value <= -0.11", -0.0019420348645473196], ["upper_bound_ip_adress > 3350174847.00", 0.0017578083281109378], ["browser <= 0.00", -0.0015646114325448487], ["1.00 < day_of_week <= 3.00", 0.001348188796056661]], 1, exp_div);
+                exp.show([["12.00 < hour_of_day <= 17.00", 0.006599891260414626], ["signup_purchase_diff > 0.87", -0.006042174768430682], ["1.00 < source <= 2.00", -0.00434795129671918], ["ip_address > 378814142305878.25", 0.003924008522016225], ["age <= 27.00", -0.0036366335547488265], ["lower_bound_ip_addres > 33501740160.00", -0.002955533979458945], ["-0.81 < purchase_value <= -0.11", 0.002720748601421547], ["country <= 72.00", -0.002281903688799125], ["browser <= 0.00", -0.0021511900821158266], ["1.00 < day_of_week <= 3.00", 0.0019462803811070377]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_tabular([["signup_purchase_diff", "0.91", -0.006382387104007902], ["user_id", "350799.00", 0.005975405343208561], ["country", "36.00", -0.004533700462725122], ["ip_address", "872548283484257.00", 0.0041191809643694845], ["source", "2.00", -0.003146938877072644], ["age", "23.00", -0.0029847279661766738], ["purchase_value", "-0.27", -0.0019420348645473196], ["upper_bound_ip_adress", "3350197759.00", 0.0017578083281109378], ["browser", "0.00", -0.0015646114325448487], ["day_of_week", "2.00", 0.001348188796056661]], 1, raw_div);
+            exp.show_raw_tabular([["hour_of_day", "17.00", 0.006599891260414626], ["signup_purchase_diff", "0.91", -0.006042174768430682], ["source", "2.00", -0.00434795129671918], ["ip_address", "872548283484257.00", 0.003924008522016225], ["age", "23.00", -0.0036366335547488265], ["lower_bound_ip_addres", "33501975040.00", -0.002955533979458945], ["purchase_value", "-0.27", 0.002720748601421547], ["country", "36.00", -0.002281903688799125], ["browser", "0.00", -0.0021511900821158266], ["day_of_week", "2.00", 0.0019462803811070377]], 1, raw_div);
         
         </script>
         </body></html>

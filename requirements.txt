@@ -17,3 +17,8 @@ imblearn
 tensorflow
 shap
 lime
+mlflow
+flask
+click
+flask_sqlalchemy
+Flask-Migrate
