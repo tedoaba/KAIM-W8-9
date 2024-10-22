@@ -1,6 +1,7 @@
 import mlflow
 import mlflow.sklearn
 import mlflow.xgboost
+import os
 
 def initialize_mlflow(experiment_name, tracking_uri):
     # Set the tracking URI for MLflow
@@ -18,7 +19,7 @@ def initialize_mlflow(experiment_name, tracking_uri):
     except Exception as e:
         print(f"Error initializing MLflow experiment: {e}")
 
-def log_model_performance_to_mlflow(reports):
+def log_model_performance_to_mlflow(reports, shap_values_dict, lime_explanations):
     for dataset_name, model_reports in reports.items():
         for model_name, model, report in model_reports:
             with mlflow.start_run(run_name=f"{model_name}_{dataset_name}"):
@@ -34,3 +35,34 @@ def log_model_performance_to_mlflow(reports):
                     mlflow.xgboost.log_model(model, "model")
                 else:
                     mlflow.sklearn.log_model(model, "model")
+
+                
+                # SHAP
+                if model_name == 'Random_Forest':
+                    shap_plot_path = f"../plots/{dataset_name}_{model_name}_shap_summary.png"
+                    shap_dependency_path = f'../plots/{dataset_name}_{model_name}_shap_dependence.png'
+                    
+                    if os.path.exists(shap_plot_path):
+                        mlflow.log_artifact(shap_plot_path)
+                    if os.path.exists(shap_dependency_path):
+                        mlflow.log_artifact(shap_dependency_path)
+                else:
+                    shap_plot_path = f"../plots/{dataset_name}_{model_name}_shap_summary.png"
+                    shap_dependency_path = f'../plots/{dataset_name}_{model_name}_shap_dependence.png'
+                    shap_force_path = f'../plots/{dataset_name}_{model_name}_shap_force.png'
+
+                    if os.path.exists(shap_plot_path):
+                        mlflow.log_artifact(shap_plot_path)
+                    if os.path.exists(shap_force_path):
+                        mlflow.log_artifact(shap_force_path)
+                    if os.path.exists(shap_dependency_path):
+                        mlflow.log_artifact(shap_dependency_path)
+
+
+                lime_explanations_path = f'../lime_explanations/{dataset_name}_{model_name}_lime.html'
+                lime_importance_path = f'../plots/{dataset_name}_{model_name}_lime_feature_importance.png'
+
+                if os.path.exists(lime_explanations_path):
+                    mlflow.log_artifact(lime_explanations_path)
+                if os.path.exists(lime_importance_path):
+                    mlflow.log_artifact(lime_importance_path)
