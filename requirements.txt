@@ -11,4 +11,7 @@ databases
 scikit-learn
 scipy
 python-dotenv
-
+xgboost
+mlflow
+imblearn
+tensorflow

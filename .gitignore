@@ -15,6 +15,11 @@ mlartifacts/
 mlruns/
 
 
+#mlflow files
+mlartifacts/
+mlruns/
+
+
 # Distribution / packaging
 .Python
 build/
