@@ -6,9 +6,6 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV FLASK_APP=app
 
-# Set the working directory
-WORKDIR /app
-
 # Copy and install system dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
@@ -21,10 +18,14 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Set the working directory
+WORKDIR /app
+
 # Copy project dependencies first to improve caching
 COPY requirements.txt .
-RUN pip install --upgrade pip && pip install -r requirements.txt
 
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 # Copy Node dependencies and install them
 COPY app/package.json .
 RUN npm install

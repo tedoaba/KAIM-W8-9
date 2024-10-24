@@ -17,6 +17,11 @@ module.exports = {
         merriweather: ['Merriweather', 'serif'],
       },
       colors: {
+        'dg-blue': '#88BDBC',
+        'dg-light-blue': '#254E58',
+        'dg-dark-blue': '#112D32',
+        'dg-dark-grey': '#4F4A41',
+        'dg-light-grey': '#6E6658',
         'tedo-dark-blue': '#080F5B',
         'tedo-blue': '#0D19A3',
         'tedo-light-green': '#15DB95',
