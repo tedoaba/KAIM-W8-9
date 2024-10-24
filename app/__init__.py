@@ -5,6 +5,7 @@ from flask import Flask
 from app import pages, transactions, data, predict
 from app.models import db
 from app.database import init_db_command
+from app.data import create_dash_app
 
 load_dotenv()
 
@@ -32,6 +33,8 @@ def create_app():
     app.register_blueprint(predict.bp)
     #app.register_blueprint(train.bp)
 
+    # Initialize the Dash app, passing the Flask app as the server
+    create_dash_app(app)
     # Add CLI command
     app.cli.add_command(init_db_command)
 

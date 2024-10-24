@@ -24,3 +24,4 @@ flask_sqlalchemy
 Flask-Migrate
 pytest
 dbt
+dash
