@@ -20,3 +20,20 @@ class Transaction(db.Model):
     upper_bound_ip_address = db.Column(db.Float, nullable=False)
     country = db.Column(db.String, nullable=False)
 
+class Features(db.Model):
+    __tablename__ = 'features'
+
+    user_id = db.Column(db.Integer, primary_key=True)
+    signup_time = db.Column(db.DateTime)
+    purchase_time = db.Column(db.DateTime)
+    purchase_value = db.Column(db.Float)
+    device_id = db.Column(db.String)
+    source = db.Column(db.String)
+    browser = db.Column(db.String)
+    sex = db.Column(db.String)
+    age = db.Column(db.Integer)
+    ip_address = db.Column(db.String)
+    class_ = db.Column(db.Integer)  # Fraud class: 0 = non-fraud, 1 = fraud
+    lower_bound_ip_address = db.Column(db.BigInteger)
+    upper_bound_ip_address = db.Column(db.BigInteger)
+    country = db.Column(db.String)

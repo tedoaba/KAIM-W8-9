@@ -15,6 +15,10 @@ import mlflow
 from mlflow import pyfunc
 import xgboost as xgb
 from dash import Dash, dcc, html, Input, Output
+from flask import Blueprint
+from dash import Dash
+import dash_core_components as dcc
+import dash_html_components as html
 
 load_dotenv()
 
@@ -108,36 +112,3 @@ def result():
     print("Prediction: ", prediction)
     
     return render_template('data/result.html', prediction=prediction, ID=ID)
-
-from flask import Blueprint
-from dash import Dash
-import dash_core_components as dcc
-import dash_html_components as html
-
-# Create a Flask Blueprint
-bp = Blueprint("data", __name__)
-
-# Do not link Dash directly to the Blueprint
-# Instead, define Dash within a function where you have access to the main Flask app
-
-def create_dash_app(flask_app):
-    # Create the Dash app and pass the Flask app as the server
-    dash_app = Dash(__name__, server=flask_app, url_base_pathname='/dash/')
-
-    # Define Dash layout
-    dash_app.layout = html.Div(children=[
-        html.H1('Dash App'),
-        dcc.Graph(
-            id='example-graph',
-            figure={
-                'data': [
-                    {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'Sample'}
-                ],
-                'layout': {
-                    'title': 'Sample Data Visualization'
-                }
-            }
-        )
-    ])
-
-    return dash_app
