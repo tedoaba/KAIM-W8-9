@@ -20,6 +20,8 @@ mlruns
 mlartifacts/
 mlruns/
 
+node_modules/
+
 
 # Distribution / packaging
 .Python

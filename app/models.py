@@ -33,7 +33,7 @@ class Features(db.Model):
     sex = db.Column(db.String)
     age = db.Column(db.Integer)
     ip_address = db.Column(db.String)
-    class_ = db.Column('class', db.Integer)  # Fraud class: 0 = non-fraud, 1 = fraud
+    class_ = db.Column('class', db.Integer)
     lower_bound_ip_address = db.Column(db.BigInteger)
     upper_bound_ip_address = db.Column(db.BigInteger)
     country = db.Column(db.String)

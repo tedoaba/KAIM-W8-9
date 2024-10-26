@@ -1,7 +1,7 @@
 import pandas as pd
 import plotly.express as px
 from dash import Dash, dcc, html, Input, Output
-from sqlalchemy import create_engine, func
+from sqlalchemy import func
 from app.models import Features 
 
 def create_summary_dash_app(flask_app, db):
@@ -101,7 +101,7 @@ def create_device_browser_dash_app(flask_app, db):
             )
             device_browser_df = pd.DataFrame(device_browser_data, columns=['device_id', 'browser', 'fraud_cases'])
 
-        fig = px.bar(device_browser_df, x='device_id', y='fraud_cases', color='browser', title='Fraud by Device and Browser')
+        fig = px.bar(device_browser_df, x='fraud_cases', y='device_id', color='browser', title='Fraud by Device and Browser')
         return fig
 
     return dash_app

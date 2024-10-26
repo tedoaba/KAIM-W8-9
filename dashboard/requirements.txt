@@ -1,4 +1,0 @@
-Flask
-Dash
-pandas
-plotly

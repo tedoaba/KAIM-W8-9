@@ -1,43 +1,24 @@
-# Use official Python image as the base image
+# Use the official Python image as a base image
 FROM python:3.10
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-ENV FLASK_APP=app
-
-# Copy and install system dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpq-dev \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install Node.js and npm for TailwindCSS
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Set the working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy project dependencies first to improve caching
+# Copy the requirements file into the container
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
-# Copy Node dependencies and install them
-COPY app/package.json .
-RUN npm install
+# Install the dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the project files
-COPY app/. .
+# Copy the entire application into the container
+COPY . .
 
-# Build CSS with Tailwind
-RUN npm run create-css
+# Set environment variables
+ENV FLASK_APP=app
+ENV FLASK_ENV=development
 
-# Expose port 5000 for the Flask app
+# Expose the port the app runs on
 EXPOSE 5000
 
-# Run the Flask app
+# Command to run the application
 CMD ["flask", "run", "--host=0.0.0.0"]

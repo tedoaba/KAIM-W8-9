@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask
 
-from app import pages, transactions, data, predict
+from app import pages, transactions, data, xgb_model
 from app.models import db
 from app.database import init_db_command
 from app.dashboard import (
@@ -35,7 +35,7 @@ def create_app():
     app.register_blueprint(pages.bp)
     app.register_blueprint(transactions.bp)
     app.register_blueprint(data.bp)
-    app.register_blueprint(predict.bp)
+    app.register_blueprint(xgb_model.bp)
 
     # Initialize Dash apps and pass the `db` object for querying the database
     create_summary_dash_app(app, db)

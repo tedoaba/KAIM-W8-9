@@ -1,31 +1,22 @@
-version: '3.8'  # Updated version for better features
-
 services:
-  app:
+  flask:
     build: .
-    container_name: flask_app
-    command: flask run --host=0.0.0.0
     ports:
       - "5000:5000"
     environment:
-      FLASK_ENV: development
-      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-    volumes:
-      - .:/app  # This allows for live code updates; consider changing for production
+      - DATABASE_URL=${DATABASE_URL}
     depends_on:
       - db
-    restart: unless-stopped  # Automatically restart unless stopped manually
 
   db:
-    image: postgres:13
-    container_name: postgres_db
+    image: postgres:17
+    restart: always
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
-      - pgdata:/var/lib/postgresql/data
-    restart: unless-stopped  # Automatically restart unless stopped manually
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  pgdata:
+  postgres_data:
