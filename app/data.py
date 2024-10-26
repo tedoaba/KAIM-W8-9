@@ -35,7 +35,7 @@ def data():
 
 
     # Query the first 5 rows using pandas
-    df = pd.read_sql('SELECT * FROM features LIMIT 15', engine)
+    df = pd.read_sql('SELECT * FROM features LIMIT 10', engine)
 
     # Convert DataFrame to dictionary for template rendering
     features = df.to_dict(orient='records')

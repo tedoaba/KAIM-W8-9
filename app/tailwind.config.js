@@ -49,6 +49,9 @@ module.exports = {
         'simple-dark-green': '#45A29E',
       },
     },
+    backgroundImage: {
+      'adey-image': "url('/static/assets/finance-5.jpg')",
+    },
   },
   plugins: [],
 }
