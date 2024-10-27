@@ -9,7 +9,8 @@ from app.dashboard import (
     create_summary_dash_app,
     create_fraud_trends_dash_app,
     create_geo_analysis_dash_app,
-    create_device_browser_dash_app
+    create_device_browser_dash_app,
+    create_fraud_analysis_dash_app
 )
 
 load_dotenv()
@@ -42,6 +43,7 @@ def create_app():
     create_fraud_trends_dash_app(app, db)
     create_geo_analysis_dash_app(app, db)
     create_device_browser_dash_app(app, db)
+    create_fraud_analysis_dash_app(app, db)
 
     # Add CLI command
     app.cli.add_command(init_db_command)
