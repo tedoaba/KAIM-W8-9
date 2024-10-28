@@ -2,7 +2,7 @@ services:
   web:
     build: .
     container_name: flask_app
-    command: flask --app app run --host=0.0.0.0 --port=8000 --debug
+    command: gunicorn -b 0.0.0.0:8000 app:app
     ports:
       - "8000:8000"
     environment:
