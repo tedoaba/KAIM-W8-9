@@ -2,8 +2,6 @@ pandas
 numpy
 matplotlib
 seaborn
-dbt
-dbt-postgres
 psycopg2-binary
 telethon
 sqlalchemy
@@ -23,5 +21,4 @@ click
 flask_sqlalchemy
 Flask-Migrate
 pytest
-dbt
 dash
