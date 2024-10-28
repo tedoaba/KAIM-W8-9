@@ -1,24 +1,26 @@
-# Use the official Python image as a base image
+# Use official Python image
 FROM python:3.10
 
-# Set the working directory in the container
+# Set environment variables for Flask
+ENV PYTHONUNBUFFERED=1
+
+# Set working directory
 WORKDIR /app
 
-# Copy the requirements file into the container
+# Copy requirements file and install dependencies
 COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-# Install the dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the entire application into the container
+# Copy project files
 COPY . .
 
-# Set environment variables
-ENV FLASK_APP=app
-ENV FLASK_ENV=development
+# Install npm and necessary packages (for running Tailwind CSS commands)
+RUN apt-get update && apt-get install -y nodejs npm
+WORKDIR /app/app  # Move to where `package.json` is located
+RUN npm install
 
-# Expose the port the app runs on
-EXPOSE 5000
+# Expose Flask port
+EXPOSE 8000
 
-# Command to run the application
-CMD ["flask", "run", "--host=0.0.0.0"]
+# Command to run on container start
+CMD ["flask", "--app", "app", "run", "--host=0.0.0.0", "--port=8000", "--debug"]

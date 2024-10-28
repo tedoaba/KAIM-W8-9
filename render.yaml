@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: css-builder
+    env: node
+    buildCommand: "npm install"
+    startCommand: "npx tailwindcss -i ./static/src/input.css -o ./static/css/main.css --minify"
+    plan: free
+
+  - type: web
+    name: init-db
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "flask --app app init-db"
+    plan: free
+    autoDeploy: false 
+
+  - type: web
+    name: flask-dash-app
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "flask --app app run --host 0.0.0.0 --port 8000 --debug"
+    plan: free
