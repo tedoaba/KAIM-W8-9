@@ -9,6 +9,7 @@ WORKDIR /app
 
 # Copy requirements file and install dependencies
 COPY requirements.txt .
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Copy project files
@@ -16,7 +17,6 @@ COPY . .
 
 # Install npm and necessary packages (for running Tailwind CSS commands)
 RUN apt-get update && apt-get install -y nodejs npm
-WORKDIR /app/app  # Move to where `package.json` is located
 RUN npm install
 
 # Expose Flask port

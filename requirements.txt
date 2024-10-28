@@ -4,7 +4,6 @@ matplotlib
 seaborn
 dbt
 dbt-postgres
-psycopg2
 psycopg2-binary
 telethon
 sqlalchemy
