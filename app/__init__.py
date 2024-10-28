@@ -42,5 +42,11 @@ def create_app():
     # Print environment information for debugging
     print(f"Current Environment: {os.getenv('ENVIRONMENT')}")
     print(f"Using Database: {app.config.get('SQLALCHEMY_DATABASE_URI')}")
+    
+    if os.getenv('ENVIRONMENT') == 'Production':
+        app.config['DEBUG'] = False
+    else:
+        app.config['DEBUG'] = True
+
 
     return app
