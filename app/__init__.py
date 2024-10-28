@@ -5,13 +5,8 @@ from flask import Flask
 from app import pages, transactions, data, xgb_model
 from app.models import db
 from app.database import init_db_command
-from app.dashboard import (
-    create_summary_dash_app,
-    create_fraud_trends_dash_app,
-    create_geo_analysis_dash_app,
-    create_device_browser_dash_app,
-    create_fraud_analysis_dash_app
-)
+from app.dashboard import create_fraud_analysis_dash_app
+
 
 load_dotenv()
 
@@ -39,10 +34,6 @@ def create_app():
     app.register_blueprint(xgb_model.bp)
 
     # Initialize Dash apps and pass the `db` object for querying the database
-    create_summary_dash_app(app, db)
-    create_fraud_trends_dash_app(app, db)
-    create_geo_analysis_dash_app(app, db)
-    create_device_browser_dash_app(app, db)
     create_fraud_analysis_dash_app(app, db)
 
     # Add CLI command

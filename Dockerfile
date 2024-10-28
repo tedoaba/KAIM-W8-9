@@ -17,6 +17,7 @@ COPY . .
 
 # Install npm and necessary packages (for running Tailwind CSS commands)
 RUN apt-get update && apt-get install -y nodejs npm
+COPY app/package.json package.json
 RUN npm install
 
 # Expose Flask port
