@@ -24,5 +24,5 @@ RUN npm install
 EXPOSE 8000
 
 # Command to run on container start
-#CMD ["flask", "--app", "app", "run", "--host=0.0.0.0", "--port=8000", "--debug"]
+# CMD ["flask", "--app", "app", "run", "--host=0.0.0.0", "--port=8000", "--debug"]
 CMD ["gunicorn", "-b", "0.0.0.0:8000", "app:app"]
