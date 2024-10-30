@@ -228,14 +228,37 @@ python -m flask --app app run --port 8000 --debug
 
 ### Flask App
 
-![Correlation of the Dataset](plots/fraud_data_XGBClassifier_shap_summary.png)
+#### Home
 
-[![Flask Demo](https://raw.githubusercontent.com/tedoaba/KAIM-W8-9/main/plots/thumbnail.png)](https://raw.githubusercontent.com/tedoaba/KAIM-W8-9/main/video/kaim-week-8-9-web.mp4)
+![Home](plots/home.png)
+
+
+#### Dataset
+
+![Dataset](plots/data.png)
+
+#### Create
+
+![Create](plots/create.png)
+
+#### History
+
+![History](plots/history.png)
+
+#### Result
+
+![Result](plots/result.png)
 
 ### Dashboard
 
+#### Summary
+
 ![Dash Summary](plots/dash-summary.png)
 
-![Dash Summary](plots/dash-distribution.png)
+#### Distribution
 
-![Dash Summary](plots/dash-other.png)
+![Distribution](plots/dash-distribution.png)
+
+#### Others
+
+![Dash Others](plots/dash-other.png)
