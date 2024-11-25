@@ -1,6 +1,6 @@
-# KAIM Week 8 and 9 Challenge
+# Fraud Detection for e-commerce and Bank Transactions - Adey Innovations Inc.
 
-## Improved Detection of Fraud Cases for E-commerce and Bank Transactions - Adey Innovetions Inc.
+## KAIM Week 8 and 9 Challenge
 
 Fraud detection is an essential aspect of financial technology, especially within the e-commerce and banking sectors, where the potential for fraudulent activity is ever-present. As transactions continue to migrate to online platforms, these industries face unique challenges in preventing financial fraud. E-commerce platforms handle a high volume of transactions daily, and fraudulent transactions can lead to financial losses, compromised data security, and decreased customer trust. Banking institutions, too, must continually monitor and secure online and card transactions against fraud, which can involve tactics ranging from identity theft to unauthorized withdrawals. 
 
